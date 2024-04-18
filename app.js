@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload');
 const errorMiddleware = require('./middlewares/error');
 const swaggerDocument = require('./swagger.js');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors')
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
+app.use(cors());
 
 const user = require('./routes/userRoute');
 const product = require('./routes/productRoute');
