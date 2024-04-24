@@ -4,7 +4,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const connectDatabase = async () => {
     try {
       await mongoose.connect(
-        process.env.MONGO_URI || 'mongodb+srv://phanhoangphuc0311:%40Phuc1755@cluster0.kkn7cwq.mongodb.net/Crud?authSource=Cluster0&authMechanism=SCRAM-SHA-1',
+        process.env.MONGO_URI || 'mongodb+srv://phanhoangphuc0311:%40Phuc1755@cluster0.kkn7cwq.mongodb.net/ecommerce?authSource=Cluster0&authMechanism=SCRAM-SHA-1',
         {
           useNewUrlParser: true,
           useUnifiedTopology: true,

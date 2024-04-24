@@ -40,6 +40,8 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    resetPasswordOTP: { type: String }, // Thêm trường resetPasswordOTP để lưu trữ OTP
+
     resetPasswordToken: String,
     resetPasswordExpire: Date,
 });

@@ -141,7 +141,10 @@ exports.resetPassword = asyncErrorHandler(async (req, res, next) => {
     await user.save();
     sendToken(user, 200, res);
 });
-
+// exports.sendOtpResetPassword = asyncErrorHandler(async (req, res, next) =>{
+//     const user = await User.findOne({ email: req.body.email });
+    
+// })
 // Update Password
 exports.updatePassword = asyncErrorHandler(async (req, res, next) => {
 
@@ -259,4 +262,31 @@ exports.deleteUser = asyncErrorHandler(async (req, res, next) => {
     res.status(200).json({
         success: true
     });
+});
+
+
+
+
+
+exports.resetPasswordOtp = asyncErrorHandler(async (req, res, next) => {
+    const { email, otp, newPassword } = req.body;
+
+    try {
+        // Find the user by email and OTP
+        const user = await User.findOne({ email, resetPasswordOTP: otp });
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid OTP' });
+        }
+
+        // Reset password
+        user.password = newPassword;
+        user.resetPasswordOTP = null; // Clear OTP after reset
+        await user.save();
+
+        // Send response
+        res.status(200).json({ message: 'Password reset successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server Error' });
+    }
 });

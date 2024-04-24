@@ -595,3 +595,124 @@
  *         scheme: bearer
  *         bearerFormat: JWT
  */
+
+
+/**
+ * @swagger
+ * /api/forgot-password:
+ *   post:
+ *     summary: Send OTP for password reset
+ *     description: Sends a One-Time Password (OTP) to the user's email for password reset.
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User's email address.
+ *                 example: user@example.com
+ *     responses:
+ *       200:
+ *         description: OTP sent successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message.
+ *                   example: OTP sent successfully
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: User not found
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: Server Error
+ */
+
+
+/**
+ * @swagger
+ * /api/reset-password-otp:
+ *   post:
+ *     summary: Reset user password using OTP
+ *     description: Reset user password using the provided OTP
+ *     tags:
+ *       - Users
+ *     parameters:
+ *       - in: body
+ *         name: ResetPasswordRequest
+ *         description: Object containing email, OTP, and newPassword
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             email:
+ *               type: string
+ *               description: User's email
+ *               example: user@example.com
+ *             otp:
+ *               type: string
+ *               description: One-Time Password (OTP)
+ *               example: 123456
+ *             newPassword:
+ *               type: string
+ *               description: New password to set
+ *               example: newpassword123
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message
+ *                   example: Password reset successfully
+ *       400:
+ *         description: Invalid OTP or missing parameters
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *                   example: Invalid OTP
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *                   example: Server Error
+ */
